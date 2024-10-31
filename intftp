@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import socket
+
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp.connect(("172.16.1.108",21))
+
+banner = tcp.recv(1024)
+print(banner)
+
+tcp.send(str.encode("USER ftp\r\n"))
+user = tcp.recv(1024)
+print(user)
+
+tcp.send(str.encode("PASS ftp\r\n"))
+password = tcp.recv(1024)
+print(password)
+
+tcp.send(str.encode("HELP \r\n"))
+help = tcp.recv(1024)
+print(help)
